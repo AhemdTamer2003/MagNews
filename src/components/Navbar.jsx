@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 
 const Navbar = ({ handleSearch, setCategory }) => {
@@ -12,11 +12,14 @@ const Navbar = ({ handleSearch, setCategory }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSearch(searchTerm.trim()); // Trim whitespace and pass searchTerm to handleSearch
+    setSearchTerm(''); // Clear input after search
   };
 
   const handleCategoryClick = (category) => {
     setCategory(category);
   };
+
+  const categories = ['technology', 'business', 'health', 'sports', 'entertainment'];
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -56,7 +59,5 @@ const Navbar = ({ handleSearch, setCategory }) => {
     </nav>
   );
 };
-
-const categories = ['technology', 'business', 'health', 'sports', 'entertainment'];
 
 export default Navbar;

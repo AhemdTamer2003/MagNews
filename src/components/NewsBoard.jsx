@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-const-assign */
 import React, { useState, useEffect } from 'react';
 import Newsitem from './Newsitem';
 import Navbar from './Navbar';
@@ -14,9 +13,9 @@ const NewsBoard = () => {
     const fetchArticles = async () => {
       setLoading(true);
       try {
-        const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
         if (searchTerm) {
-          url += `&q=${searchTerm}`;
+          url += `&q=${encodeURIComponent(searchTerm)}`;
         }
         const response = await fetch(url);
         if (!response.ok) {
@@ -41,7 +40,7 @@ const NewsBoard = () => {
 
   return (
     <div>
-       <Navbar handleSearch={handleSearch} /> 
+      <Navbar handleSearch={handleSearch} />
       <h2 className="text-center">Latest <span className="badge bg-danger">News</span></h2>
       {loading ? (
         <p>Loading...</p>
